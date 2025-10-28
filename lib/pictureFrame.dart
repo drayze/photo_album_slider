@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photo_ablum_slider/main.dart';
+import 'package:photo_album_slider/main.dart';
 
 class MyPicsState extends State<MyPics> {
   // Creating a PageController to control the scrolling of the photos

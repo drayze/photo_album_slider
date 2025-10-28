@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photo_ablum_slider/pictureFrame.dart';
+import 'package:photo_album_slider/pictureFrame.dart';
 
 void main() {
   runApp(const MyPics());

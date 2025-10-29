@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:photo_album_slider/pictureFrame.dart';
+import 'picture_frame.dart';
 
 void main() {
   runApp(const MyPics());
 }
 
-class MyPics extends StatefulWidget {
+class MyPics extends StatelessWidget {
   const MyPics({super.key});
 
   @override
-  State<MyPics> createState() => MyPicsState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Picture Frame',
+      home: SlideShow(),
+    );
+  }
 }

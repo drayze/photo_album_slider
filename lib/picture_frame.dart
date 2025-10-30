@@ -43,7 +43,12 @@ class _SlideShowState extends State<SlideShow> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Memories with you.')),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
+        title: const Text('Memories with you.'),
+      ),
+      backgroundColor: Colors.black87,
       body: Center(
         child: CarouselSlider(
           options: CarouselOptions(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'picture_frame.dart';
 
 void main() {
@@ -11,6 +12,7 @@ class MyPics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Picture Frame',
       home: SlideShow(),
     );

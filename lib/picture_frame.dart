@@ -1,5 +1,6 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'dart:convert';
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -20,55 +21,52 @@ class _SlideShowState extends State<SlideShow> {
   }
 
   Future<void> getImages() async {
-    final directory = await rootBundle.loadString('photos/');
+    final directory = await rootBundle.loadString('AssetManifest.json');
     final Map<String, dynamic> manifestMap = jsonDecode(directory);
 
     final photos = manifestMap.keys
-      .where((String key) => key.startsWith('photos/')).toList();
-
+        .where((String key) => key.startsWith('assets/photos/'))
+        .toList();
 
     setState(() {
       items = photos;
     });
-    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    if(items.isEmpty) {
+    if (items.isEmpty) {
       return Scaffold(
-          appBar: AppBar(
-            title: const Text('Memories with you.'),
-          ), body: Center(child: CircularProgressIndicator()),);
+        appBar: AppBar(title: const Text('Memories with you.')),
+        body: Center(child: CircularProgressIndicator()),
+      );
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Memories with you.'),
-      ),
+      appBar: AppBar(title: const Text('Memories with you.')),
       body: Center(
-        child: CarouselSlider(options: CarouselOptions(
-          height: 400,
-          enlargeCenterPage: true,
-          autoPlay: true,
-          autoPlayInterval: Duration(seconds: 3),
-          autoPlayAnimationDuration: Duration(milliseconds: 800),
-          aspectRatio: 16/9,
+        child: CarouselSlider(
+          options: CarouselOptions(
+            height: 700,
+            enlargeCenterPage: true,
+            autoPlay: true,
+            autoPlayInterval: Duration(seconds: 3),
+            autoPlayAnimationDuration: Duration(milliseconds: 800),
+            aspectRatio: 16 / 9,
+          ),
+          items: items.map((item) {
+            return Builder(
+              builder: (BuildContext context) {
+                return Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Image.asset(item, fit: BoxFit.cover),
+                );
+              },
+            );
+          }).toList(),
         ),
-        items: items.map((item) {
-          return Builder(
-            builder: (BuildContext context) {
-              return Container(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width,
-                margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                child: Image.asset(item, fit: BoxFit.cover),
-              );
-            },
-          );
-        }).toList(),
-        ),)
-      );
+      ),
+    );
   }
 }

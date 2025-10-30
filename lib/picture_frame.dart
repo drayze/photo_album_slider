@@ -47,7 +47,8 @@ class _SlideShowState extends State<SlideShow> {
       body: Center(
         child: CarouselSlider(
           options: CarouselOptions(
-            height: 700,
+            height: MediaQuery.of(context).size.height - kToolbarHeight,
+            viewportFraction: 1.0,
             enlargeCenterPage: true,
             autoPlay: true,
             autoPlayInterval: Duration(seconds: 3),
@@ -60,7 +61,7 @@ class _SlideShowState extends State<SlideShow> {
                 return Container(
                   width: MediaQuery.of(context).size.width,
                   margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                  child: Image.asset(item, fit: BoxFit.cover),
+                  child: Image.asset(item, fit: BoxFit.contain),
                 );
               },
             );

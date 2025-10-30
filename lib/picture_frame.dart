@@ -48,7 +48,7 @@ class _SlideShowState extends State<SlideShow> {
         foregroundColor: Colors.white,
         title: const Text('Memories with you.'),
       ),
-      backgroundColor: Colors.black87,
+      backgroundColor: Colors.black,
       body: Center(
         child: CarouselSlider(
           options: CarouselOptions(

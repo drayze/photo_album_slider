@@ -1,8 +1,6 @@
-import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
 class SlideShow extends StatefulWidget {
   const SlideShow({super.key});
@@ -10,6 +8,7 @@ class SlideShow extends StatefulWidget {
   @override
   State<SlideShow> createState() => _SlideShowState();
 }
+
 
 class _SlideShowState extends State<SlideShow> {
   List<String> items = [];
@@ -21,14 +20,11 @@ class _SlideShowState extends State<SlideShow> {
     super.initState();
     getImages();
   }
+  void getImages() async {
+    ImagePicker imagePicker = ImagePicker();
+    List<String> photos = [];
+    imagePicker.pickImage(source: ImageSource.gallery);
 
-  Future<void> getImages() async {
-    final directory = await rootBundle.loadString('AssetManifest.json');
-    final Map<String, dynamic> manifestMap = jsonDecode(directory);
-
-    final photos = manifestMap.keys
-        .where((String key) => key.startsWith('assets/photos/'))
-        .toList();
 
     setState(() {
       items = photos;

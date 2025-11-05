@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:image_picker/image_picker.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -13,8 +13,8 @@ class SlideShow extends StatefulWidget {
 
 class _SlideShowState extends State<SlideShow> {
   List<String> items = [];
-  Duration _autoPlaySpeed = const Duration(seconds: 3);
-  bool _autoPlay = true;
+  Duration _autoPlaySpeed = const Duration(seconds: 0);
+  bool _autoPlay = false;
 
   @override
   void initState() {
@@ -46,6 +46,17 @@ class _SlideShowState extends State<SlideShow> {
                   style: TextStyle(fontWeight: FontWeight.bold),),
                 ListTile(
                   leading: const Icon(Icons.speed_outlined),
+                  title: const Text('3 seconds'),
+                  onTap: () {
+                    setState(() {
+                        _autoPlaySpeed = const Duration(seconds: 3);
+                        _autoPlay = true;
+                    });
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.speed_outlined),
                   title: const Text('5 seconds'),
                   onTap: () {
                     setState(() {
@@ -70,7 +81,7 @@ class _SlideShowState extends State<SlideShow> {
                   title: const Text('10 seconds'),
                   onTap: () {
                     setState(() {
-                      _autoPlaySpeed = const Duration(seconds: 10);
+                       _autoPlaySpeed = const Duration(seconds: 10);
                        _autoPlay = true;
                     });
                     Navigator.pop(context);

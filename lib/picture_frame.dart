@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +24,8 @@ class _SlideShowState extends State<SlideShow> {
   }
   void getImages() async {
     ImagePicker imagePicker = ImagePicker();
-    List<String> photos = [];
-    imagePicker.pickImage(source: ImageSource.gallery);
-
+    final List<XFile> pickedFiles = await imagePicker.pickMultipleMedia();
+    List<String> photos = pickedFiles.map((file) => file.path).toList();
 
     setState(() {
       items = photos;
@@ -145,7 +146,7 @@ class _SlideShowState extends State<SlideShow> {
                         .size
                         .width,
                     margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                    child: Image.asset(item, fit: BoxFit.contain),
+                    child: Image.file(File(item), fit: BoxFit.contain),
                   );
                 },
               );

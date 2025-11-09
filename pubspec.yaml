@@ -36,6 +36,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   image_picker: ^1.2.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -60,8 +62,8 @@ flutter:
   uses-material-design: true
 
   # To add photos to your application, add an photos section, like this:
-  assets:
-     - assets/photos/
+  #assets:
+  # - assets/photos/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

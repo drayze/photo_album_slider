@@ -1,9 +1,8 @@
 import 'dart:io';
-
 import 'package:hive/hive.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 class SlideShow extends StatefulWidget {
   const SlideShow({super.key});
@@ -35,11 +34,19 @@ class _SlideShowState extends State<SlideShow> {
     }
   }
   void _pickImages() async {
-    ImagePicker imagePicker = ImagePicker();
-    final List<XFile> pickedFiles = await imagePicker.pickMultipleMedia();
-    if (pickedFiles.isNotEmpty) {
-      List<String> newPhotos = pickedFiles.map((file) => file.path).toList();
-      final List<String> updatedPhotos = List.from(items)..addAll(newPhotos);
+    final List<AssetEntity>? pickedFiles = await AssetPicker.pickAssets(context,
+        pickerConfig: const AssetPickerConfig(
+          maxAssets: 1000,));
+
+    if (pickedFiles != null && pickedFiles.isNotEmpty) {
+      final List<String> newPaths = [];
+      for (final asset in pickedFiles) {
+        final file = await asset.file;
+        if (file != null) {
+          newPaths.add(file.path);
+        }
+      }
+      final List<String> updatedPhotos = List.from(items)..addAll(newPaths);
       Hive.box('pictures').put('photos', updatedPhotos);
       setState(() {
         items = updatedPhotos;
